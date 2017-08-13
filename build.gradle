@@ -21,7 +21,7 @@ version = '1.0'
 
 sonarqube {
     properties {
-        property 'sonar.projectName', 'beatbox:beatbox'
+
     }
 }
 
