@@ -18,9 +18,14 @@ plugins{
     id "java"
 }
 
+ext {
+    jacocoVersion = '0.7.8'
+}
+
 sonarqube{
     properties{
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+        property "sonar.java.coveragePlugin", "jacoco"
     }
 }
 

@@ -1,5 +1,25 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2'
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
+    }
+}
+
+//Version plugin task -> dependencyUpdates
+apply plugin: 'com.github.ben-manes.versions'
+//Method count
+apply plugin: 'com.getkeepsafe.dexcount'
+//Code Coverage
+apply plugin: 'jacoco-android'
+
 android {
     compileSdkVersion 26
     buildToolsVersion "25.0.2"
@@ -33,4 +53,15 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     testCompile 'org.mockito:mockito-core:2.8.47'
     testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+}
+
+sonarqube {
+    properties {
+        property "sonar.jacoco.reportPath", "build/jacoco/testDebugUnitTest.exec"
+        property "sonar.junit.reportsPath", "build/test-results/debug"
+    }
+}
+
+jacoco {
+    toolVersion = jacocoVersion
 }
